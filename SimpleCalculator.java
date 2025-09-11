@@ -58,7 +58,7 @@ public class SimpleCalculator {
         System.out.print("Enter the first number: ");
         calc.setNumberOne(scanner.nextDouble());
 
-        System.out.print("Enter an operator (+, -, *, /, ^)");
+        System.out.print("Enter an operator (+, -, *, /, ^): ");
         calc.setOperator(scanner.next().charAt(0));
 
         System.out.print("Enter the second number: ");
