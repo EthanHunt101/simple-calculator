@@ -1,4 +1,5 @@
 import java.util.Scanner;
+//import java.util.Math;
 
 public class SimpleCalculator {
     private double numberOne;
@@ -23,6 +24,10 @@ public class SimpleCalculator {
         return this.result;
     }
 
+    public boolean getValidOperator() {
+        return this.validOperator;
+    }
+
     public void setNumberOne(double numberOne) {
         this.numberOne = numberOne;
     }
@@ -39,6 +44,10 @@ public class SimpleCalculator {
         this.result = result;
     }
 
+    public void setValidOperator(boolean validOperator) {
+        this.validOperator = validOperator;
+    }
+
 
 
     public static void main(String[] args) {     
@@ -49,19 +58,32 @@ public class SimpleCalculator {
         System.out.print("Enter the first number: ");
         calc.setNumberOne(scanner.nextDouble());
 
-        System.out.print("Enter an operator (+, -, *,/, ^)");
+        System.out.print("Enter an operator (+, -, *, /, ^)");
         calc.setOperator(scanner.next().charAt(0));
 
         System.out.print("Enter the second number: ");
         calc.setNumberTwo(scanner.nextDouble());
 
+        calc.setValidOperator(true);
+
         switch(calc.getOperator()) {
             case '+' -> calc.setResult(calc.getNumberOne() + calc.getNumberTwo());
+            case '-' -> calc.setResult(calc.getNumberOne() - calc.getNumberTwo());
+            case '*' -> calc.setResult(calc.getNumberOne() * calc.getNumberTwo());
+            case '/' -> {
+                if (calc.getNumberTwo() == 0) {
+                    calc.setValidOperator(!true);
+                    System.out.println("You cannot divide by zero");
+                }
+                else calc.setResult(calc.getNumberOne() / calc.getNumberTwo());
+            }
+            case '^' -> calc.setResult(Math.pow(calc.getNumberOne(), calc.getNumberTwo()));
             default -> {
+                calc.setValidOperator(!true);
                 System.out.println("This is an invalid operator");
             }
         }
-        if(validOperator) {
+        if(calc.getValidOperator()) {
             System.out.println(calc.getResult());
         }
 
